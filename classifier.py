@@ -24,8 +24,11 @@ import config
 
 logger = logging.getLogger(__name__)
 
-# OpenAI client (API key from environment variable, checked at startup)
-client = OpenAI(api_key=config.require_api_key())
+# OpenAI client (compatible with DashScope / OpenAI)
+_client_kwargs = {"api_key": config.require_api_key()}
+if config.LLM_BASE_URL:
+    _client_kwargs["base_url"] = config.LLM_BASE_URL
+client = OpenAI(**_client_kwargs)
 
 
 # ============================================================

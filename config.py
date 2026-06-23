@@ -14,8 +14,21 @@ from typing import List, Dict
 # API Configuration
 # ============================================================
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-MODEL = os.environ.get("FAQ_CLASSIFIER_MODEL", "gpt-4o-mini")
+# 支持 OpenAI / DashScope 等多种 OpenAI 兼容 API
+# 优先使用 DASHSCOPE_API_KEY，其次 OPENAI_API_KEY
+_USE_DASHSCOPE = bool(os.environ.get("DASHSCOPE_API_KEY"))
+OPENAI_API_KEY = os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("OPENAI_API_KEY")
+
+# 模型与 Base URL：支持通过环境变量切换
+MODEL = os.environ.get("LLM_MODEL", "qwen-plus" if _USE_DASHSCOPE else "gpt-4o-mini")
+LLM_BASE_URL = os.environ.get(
+    "LLM_BASE_URL",
+    "https://dashscope.aliyuncs.com/compatible-mode/v1" if _USE_DASHSCOPE else "",
+)
+
+# 如果显式设置了 LLM_BASE_URL 为空字符串，则不传 base_url（使用 OpenAI 默认）
+_HAS_CUSTOM_BASE_URL = bool(os.environ.get("LLM_BASE_URL") or _USE_DASHSCOPE)
+
 TEMPERATURE = 0.0
 MAX_TOKENS = 50
 REQUEST_TIMEOUT = 30
@@ -24,16 +37,21 @@ MAX_RETRIES = 3
 
 def require_api_key() -> str:
     """Get API key from environment. Raises RuntimeError with clear
-    instructions if not set."""
-    key = os.environ.get("OPENAI_API_KEY")
+    instructions if not set.
+
+    Supports DASHSCOPE_API_KEY (priority) and OPENAI_API_KEY (fallback).
+    """
+    key = os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("OPENAI_API_KEY")
     if not key:
         raise RuntimeError(
-            "OPENAI_API_KEY environment variable is not set.\n"
-            "Please set it via:\n"
-            "  Windows CMD:  set OPENAI_API_KEY=sk-...\n"
-            "  Windows PS:   $env:OPENAI_API_KEY='sk-...'\n"
-            "  Bash:         export OPENAI_API_KEY='sk-...'\n"
-            "\nOr use mock mode: python evaluate.py --mock"
+            "未设置 API Key。请设置以下任一环境变量:\n"
+            "  DASHSCOPE_API_KEY  — 阿里云 DashScope\n"
+            "  OPENAI_API_KEY     — OpenAI\n"
+            "\n设置方式:\n"
+            "  Windows CMD:  set DASHSCOPE_API_KEY=sk-...\n"
+            "  Windows PS:   $env:DASHSCOPE_API_KEY='sk-...'\n"
+            "  Bash:         export DASHSCOPE_API_KEY='sk-...'\n"
+            "\nMock 模式无需 API Key，请使用: python evaluate.py --mock"
         )
     return key
 

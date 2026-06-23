@@ -213,7 +213,10 @@ def _make_before_classifier():
     cfg = _get_cfg()
     from openai import OpenAI
 
-    client = OpenAI(api_key=cfg.require_api_key())
+    _kwargs = {"api_key": cfg.require_api_key()}
+    if cfg.LLM_BASE_URL:
+        _kwargs["base_url"] = cfg.LLM_BASE_URL
+    client = OpenAI(**_kwargs)
     api_logger = logging.getLogger("evaluate.before")
 
     def classify(question: str) -> str:
