@@ -1,0 +1,147 @@
+{
+  "before": {
+    "mode": "before (mock)",
+    "total": 30,
+    "correct": 25,
+    "accuracy": 0.8333333333333334,
+    "per_category": {
+      "退款退货": {
+        "precision": 0.8571,
+        "recall": 0.8571,
+        "f1": 0.8571,
+        "correct": 6,
+        "expected_count": 7,
+        "predicted_count": 7
+      },
+      "物流查询": {
+        "precision": 0.8571,
+        "recall": 1.0,
+        "f1": 0.9231,
+        "correct": 6,
+        "expected_count": 6,
+        "predicted_count": 7
+      },
+      "账号问题": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 4,
+        "expected_count": 4,
+        "predicted_count": 4
+      },
+      "商品咨询": {
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1": 0.75,
+        "correct": 3,
+        "expected_count": 5,
+        "predicted_count": 3
+      },
+      "投诉建议": {
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1": 0.75,
+        "correct": 3,
+        "expected_count": 5,
+        "predicted_count": 3
+      },
+      "其他": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667,
+        "correct": 3,
+        "expected_count": 3,
+        "predicted_count": 6
+      }
+    },
+    "errors": [
+      {
+        "id": 9,
+        "question": "这款鞋有42码的吗",
+        "expected": "商品咨询",
+        "predicted": "其他"
+      },
+      {
+        "id": 14,
+        "question": "这个手机壳是硅胶的还是塑料的",
+        "expected": "商品咨询",
+        "predicted": "其他"
+      },
+      {
+        "id": 15,
+        "question": "建议你们增加夜间配送选项",
+        "expected": "投诉建议",
+        "predicted": "物流查询"
+      },
+      {
+        "id": 23,
+        "question": "你们这个退货流程也太麻烦了吧，我都搞不懂怎么操作",
+        "expected": "投诉建议",
+        "predicted": "退款退货"
+      },
+      {
+        "id": 26,
+        "question": "我要退的这个订单里有两个商品，只退一个行不行",
+        "expected": "退款退货",
+        "predicted": "其他"
+      }
+    ]
+  },
+  "after": {
+    "mode": "after (mock)",
+    "total": 30,
+    "correct": 30,
+    "accuracy": 1.0,
+    "per_category": {
+      "退款退货": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 7,
+        "expected_count": 7,
+        "predicted_count": 7
+      },
+      "物流查询": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 6,
+        "expected_count": 6,
+        "predicted_count": 6
+      },
+      "账号问题": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 4,
+        "expected_count": 4,
+        "predicted_count": 4
+      },
+      "商品咨询": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 5,
+        "expected_count": 5,
+        "predicted_count": 5
+      },
+      "投诉建议": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 5,
+        "expected_count": 5,
+        "predicted_count": 5
+      },
+      "其他": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "correct": 3,
+        "expected_count": 3,
+        "predicted_count": 3
+      }
+    },
+    "errors": []
+  }
+}

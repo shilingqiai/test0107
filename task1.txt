@@ -1,0 +1,29 @@
+0107 · 工作流 Code Review
+背景
+团队有一个"客服 FAQ 自动分类"脚本（见附件 classifier.py），用来把用户发来的问题自动分到对应的客服组。上线后发现分类准确率不理想，且偶发报错。现在需要你来审查这段代码，找出问题并改进。
+任务要求
+1. Code Review：阅读 classifier.py，找出至少 3 个问题，按严重程度排序，说明每个问题的影响。
+2. 改进 Prompt：参考 classification_prompt.md 和 categories.md，重新设计分类 prompt，说明改动理由。
+3. 跑评估：用 test_samples.json（30 条已标注正确答案的测试样本）验证改进效果，对比改进前后的准确率。可用真实 LLM API，也可用 mock 模式模拟返回。
+4. 工程化改进：基于你发现的问题，至少再完成 2 项改进。
+5. README：简要说明改进思路、如何运行代码、AI 工具使用情况。
+交付物
+请提供以下内容（README 文档 + 截图，或 GitHub 仓库链接）：
+1. README：改进思路、发现的问题、改进前后准确率对比、AI 工具使用情况
+2. 开发工具截图：展示你的开发过程（IDE / Agent 工具 / 终端等）
+3. 运行结果截图：评估结果、准确率对比等
+4. 线上地址或 GitHub 链接（推荐）：如果部署到线上或提交到 GitHub，提供链接即可，无需额外提交代码
+说明
+- 语言、框架不限
+- 鼓励使用 AI 工具辅助开发
+附件
+文件
+说明
+classifier.py
+当前分类脚本
+classification_prompt.md
+当前使用的 prompt
+test_samples.json
+30 条测试样本（含标注答案）
+categories.md
+分类标签定义
